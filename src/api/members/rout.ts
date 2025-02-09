@@ -6,7 +6,7 @@ members.post("/members", (req: Request, res: Response) => {
   try {
     if (!stdId || !moneys) {
       res.status(500).send({
-        status: "error",  
+        status: "error",
         msg: "ใส่ข้อมูลไม่ครบถ้วน",
       });
     } else {
@@ -19,12 +19,12 @@ members.post("/members", (req: Request, res: Response) => {
           msg: "จำนวนเงินนี้ไม่สามารถแลกเป็นแต้มได้",
           data: {
             stdId: stdId,
-            pointsEarned : point,
+            pointsEarned: point,
             totalPoint: totalPoint,
           },
         });
       } else {
-        point = moneys / 10;
+        point = (moneys / 100) * 10;
         totalPoint += point;
         res.status(200).send({
           status: "OK",
@@ -40,7 +40,7 @@ members.post("/members", (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).send({
       status: "OK",
-      msg: `ไม่พบข้อมูล ${error}`
+      msg: `ไม่พบข้อมูล ${error}`,
     });
   }
 });
